@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banana Mobile | Repair, Trade-In & Device Care Demo</title>
+  <meta name="description" content="Demo profile for a fictional Malaysian mobile-device repair, trade-in and recycling company." />
+  <meta name="keywords" content="phone repair Malaysia, mobile repair Petaling Jaya, phone spare parts Malaysia, mobile phone battery replacement, LCD replacement Malaysia, mobile trade-in Malaysia, used phone Malaysia, refurbished phone Malaysia, repair tools Malaysia, e-waste recycling Malaysia, Banana Mobile, NovaParts, NovaCare" />
+  <meta name="theme-color" content="#FFD400" />
+
+  <meta property="og:title" content="Banana Mobile | Repair. Renew. Reuse." />
+  <meta property="og:description" content="Mobile repairs, spare parts, trade-in, refurbished devices and responsible e-waste services since 2009." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com" />
+  <meta property="og:image" content="" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23FFD400%22/><text x=%2250%22 y=%2264%22 font-size=%2252%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-weight=%22700%22 fill=%22%23000%22>M</text></svg>">
+
+  <style>
+    :root{
+      --yellow:#FFD400;
+      --yellow-soft:#FFF0A3;
+      --black:#090909;
+      --charcoal:#141414;
+      --panel:#1C1C1C;
+      --panel-2:#222;
+      --text:#FFF;
+      --muted:#B8B8B8;
+      --line:#333;
+      --success:#6EE7A2;
+      --danger:#FF7A7A;
+      --radius:18px;
+      --shadow:0 12px 30px rgba(0,0,0,.24);
+      --max:760px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top right, rgba(255,212,0,.08), transparent 28rem),
+        var(--black);
+      color:var(--text);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.55;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    img{max-width:100%;display:block}
+
+    .shell{width:min(100% - 28px,var(--max));margin:0 auto;padding:24px 0 90px}
+    .section{margin-top:22px;padding:22px;background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .section h2{margin:0 0 16px;font-size:1.25rem}
+    .eyebrow{color:var(--yellow);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .muted{color:var(--muted)}
+    .hidden{display:none!important}
+
+    .hero{
+      text-align:center;
+      padding:34px 22px 24px;
+      background:linear-gradient(180deg,rgba(255,212,0,.08),rgba(255,212,0,0));
+      border:1px solid var(--line);
+      border-radius:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      width:220px;height:220px;
+      border:1px solid rgba(255,212,0,.18);
+      border-radius:50%;
+      top:-120px;right:-80px;
+    }
+    .logo-wrap{
+      width:98px;height:98px;margin:0 auto 16px;border-radius:24px;
+      background:var(--yellow);display:grid;place-items:center;color:#000;
+      font-size:2rem;font-weight:900;border:4px solid rgba(255,255,255,.08)
+    }
+    .logo-wrap img{width:100%;height:100%;object-fit:contain;border-radius:20px}
+    .hero h1{font-size:clamp(1.75rem,7vw,2.45rem);line-height:1.1;margin:8px 0}
+    .tagline{color:var(--yellow);font-size:1.08rem;font-weight:800;margin:4px 0 12px}
+    .hero p{margin:8px auto;max-width:620px}
+    .trust{font-size:.9rem;color:#D7D7D7}
+    .social-row{display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .social-icon{
+      width:42px;height:42px;border:1px solid var(--line);border-radius:50%;
+      display:grid;place-items:center;background:var(--panel);font-weight:800;
+      transition:.2s ease;
+    }
+    .social-icon:hover{background:var(--yellow);color:#000;transform:translateY(-2px)}
+
+    .notice{margin-top:14px;padding:12px 14px;border-radius:14px;background:#2A2400;border:1px solid #5C4D00;color:#FFF2A8;text-align:center}
+
+    .actions{display:grid;gap:12px;margin-top:18px}
+    .action{
+      display:flex;align-items:center;gap:13px;width:100%;padding:16px 18px;border-radius:16px;
+      background:var(--yellow);color:#050505;border:1px solid transparent;
+      font-weight:800;transition:.2s ease;text-align:left;cursor:pointer;
+    }
+    .action:hover{background:white;transform:translateY(-2px)}
+    .action.secondary{background:var(--panel);color:#fff;border-color:var(--line)}
+    .action.secondary:hover{background:#fff;color:#000}
+    .action .icon{font-size:1.25rem;min-width:28px}
+    .action small{display:block;font-weight:500;opacity:.72;margin-top:2px}
+    .action .arrow{margin-left:auto;font-size:1.1rem}
+
+    .priority-grid{display:grid;gap:12px}
+    .priority-grid .action:first-child{
+      min-height:78px;font-size:1.08rem;
+      background:linear-gradient(135deg,var(--yellow),#FFF09A);
+      box-shadow:0 0 0 1px rgba(255,212,0,.35),0 12px 28px rgba(255,212,0,.12);
+    }
+    .priority-grid .action:first-child .icon{font-size:1.65rem}
+
+    .campaign-card{
+      margin-top:18px;
+      padding:20px;
+      border-radius:20px;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.35), transparent 180px),
+        linear-gradient(135deg,#FFD400,#FFB800);
+      color:#090909;
+      border:1px solid rgba(255,255,255,.35);
+      box-shadow:0 16px 34px rgba(255,184,0,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .campaign-card:after{
+      content:"🍌";
+      position:absolute;
+      right:18px;
+      top:10px;
+      font-size:4.2rem;
+      opacity:.2;
+      transform:rotate(-14deg);
+    }
+    .campaign-card h2{margin:4px 0 8px;font-size:1.45rem}
+    .campaign-card p{margin:0 0 14px;max-width:540px}
+    .campaign-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .campaign-main{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:13px 18px;border-radius:14px;background:#090909;color:#fff;
+      font-weight:900;border:0;cursor:pointer
+    }
+    .campaign-main:hover{background:#fff;color:#000}
+    .prize-links{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+    .prize-link{
+      padding:10px 8px;border-radius:12px;background:rgba(255,255,255,.65);
+      color:#090909;text-align:center;font-weight:850;border:1px solid rgba(0,0,0,.12)
+    }
+    .prize-link:hover{background:#fff}
+
+
+    .icon-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .service-card,.trust-card,.brand-card,.location-card{
+      background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;
+    }
+    .service-card h3,.location-card h3{margin:6px 0 10px;font-size:1rem}
+    .service-card ul{padding-left:18px;margin:0;color:var(--muted)}
+    .service-card li+li{margin-top:4px}
+
+    .values,.brands,.trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .value,.brand-card,.trust-card{
+      text-align:center;font-weight:800;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:14px
+    }
+
+    .shop-grid,.location-actions,.contact-list{display:grid;gap:10px}
+    .location-card+.location-card{margin-top:12px}
+    .location-card address{font-style:normal;color:var(--muted)}
+    .location-actions{grid-template-columns:1fr 1fr 1fr;margin-top:14px}
+    .mini-btn{
+      padding:11px 10px;border-radius:12px;border:1px solid var(--line);background:#252525;color:#fff;
+      font-weight:750;text-align:center;cursor:pointer
+    }
+    .mini-btn:hover{background:var(--yellow);color:#000}
+
+    .contact-item{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
+    .contact-item:last-child{border-bottom:0}
+    .contact-item span:first-child{color:var(--muted)}
+
+    form{display:grid;gap:13px}
+    .field{display:grid;gap:7px}
+    label{font-size:.88rem;font-weight:750}
+    input,select,textarea{
+      width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);
+      background:#101010;color:#fff;outline:none
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,212,0,.12)}
+    textarea{min-height:120px;resize:vertical}
+    .checkbox{display:flex;gap:10px;align-items:flex-start}
+    .checkbox input{width:auto;margin-top:5px}
+    .submit-btn{
+      border:0;border-radius:14px;background:var(--yellow);color:#000;padding:14px 18px;
+      font-weight:900;cursor:pointer
+    }
+    .submit-btn:hover{background:white}
+    .form-message{padding:12px;border-radius:12px;display:none}
+    .form-message.success{display:block;background:#0E3A21;color:var(--success);border:1px solid #1A6A3D}
+    .form-message.error{display:block;background:#411818;color:var(--danger);border:1px solid #7B2A2A}
+    .hp{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+
+    .legal-links{display:flex;gap:10px 14px;flex-wrap:wrap;color:var(--muted);font-size:.86rem}
+    .legal-links a:hover{color:var(--yellow)}
+    footer{text-align:center;color:var(--muted);padding:28px 12px 0;font-size:.88rem}
+    footer strong{color:#fff}
+
+    .whatsapp-float{
+      position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;
+      background:var(--yellow);color:#000;display:grid;place-items:center;font-size:1.55rem;
+      box-shadow:0 12px 28px rgba(0,0,0,.4);z-index:20;border:2px solid #000
+    }
+    .whatsapp-float:hover{background:#fff;transform:translateY(-2px)}
+
+    .admin-toggle{
+      position:fixed;left:14px;bottom:14px;background:#202020;color:#999;border:1px solid #333;
+      border-radius:10px;padding:8px 10px;font-size:.72rem;z-index:21;cursor:pointer
+    }
+    .admin-panel{
+      position:fixed;inset:0;background:rgba(0,0,0,.84);z-index:30;padding:20px;overflow:auto;display:none
+    }
+    .admin-panel.open{display:block}
+    .admin-card{
+      width:min(100%,760px);margin:auto;background:#151515;border:1px solid #3A3A3A;border-radius:18px;padding:20px
+    }
+    .admin-card h2{margin-top:0}
+    .admin-grid{display:grid;gap:12px;grid-template-columns:1fr}
+    .admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .admin-note{font-size:.8rem;color:#aaa}
+    .danger-btn{background:#461D1D;color:#fff;border:1px solid #6D2F2F}
+
+    @media(min-width:620px){
+      .icon-grid{grid-template-columns:1fr 1fr}
+      .trust-grid{grid-template-columns:repeat(2,1fr)}
+      .brands{grid-template-columns:repeat(3,1fr)}
+      .values{grid-template-columns:repeat(5,1fr)}
+      .admin-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto!important;transition:none!important}
+    }
+  </style>
+
+  <script type="application/ld+json" id="schema-json"></script>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="logo-wrap" id="logoBox">M</div>
+      <div class="eyebrow">Fictional Demo Profile</div>
+      <h1 id="companyName">Banana Mobile Solutions</h1>
+      <div class="tagline" id="tagline">Repair. Renew. Reuse.</div>
+      <p id="heroDescription">Demo mobile device repairs, spare parts, trade-in solutions, refurbished devices and responsible recycling services.</p>
+      <p class="trust" id="trustLine">A fictional demo company profile created for presentation purposes.</p>
+      <div class="social-row" id="socialRow"></div>
+      <div class="notice hidden" id="announcement"></div>
+    </section>
+
+    <section class="campaign-card" id="play-win">
+      <div class="eyebrow" style="color:#111">Limited-Time Campaign</div>
+      <h2>Play & Win: The Banana Quest</h2>
+      <p>Complete the 45-second challenge, collect the required score and unlock a prize redemption page.</p>
+      <div class="campaign-actions">
+        <a class="campaign-main" id="campaignGameButton" href="fruit_kingdom_play_win/index.html" data-track="Featured Play & Win">🎮 Play Now</a>
+      </div>
+      <div class="prize-links" id="prizeLinks"></div>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Quick Access</div>
+      <h2>How can we help?</h2>
+      <div class="priority-grid" id="primaryActions"></div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="eyebrow">Complete Device Lifecycle</div>
+      <h2>Our Services</h2>
+      <div class="icon-grid">
+        <article class="service-card">
+          <div>🛠️</div>
+          <h3>Mobile Device Repair Services</h3>
+          <ul>
+            <li>Screen and LCD replacement</li>
+            <li>Battery replacement</li>
+            <li>Charging-port repair</li>
+            <li>Camera repair</li>
+            <li>Speaker and microphone repair</li>
+            <li>Housing replacement</li>
+            <li>Water-damage treatment</li>
+            <li>Motherboard and IC-level repair</li>
+            <li>Foldable and flip-device repair</li>
+            <li>Inspection and troubleshooting</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <div>📦</div>
+          <h3>Mobile Spare Parts and Tools</h3>
+          <ul>
+            <li>Mobile phone screens and LCDs</li>
+            <li>Batteries and flex cables</li>
+            <li>Housings and cameras</li>
+            <li>Charging components</li>
+            <li>Repair tools</li>
+            <li>Soldering equipment</li>
+            <li>Mobile accessories</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <div>♻️</div>
+          <h3>Device Trade-In</h3>
+          <ul>
+            <li>Smartphone and tablet assessment</li>
+            <li>Dealer trade-in programmes</li>
+            <li>Corporate trade-in solutions</li>
+            <li>Device collection</li>
+            <li>Condition verification</li>
+            <li>Trade-in quotation</li>
+            <li>Refurbishment and resale support</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <div>📱</div>
+          <h3>Used and Refurbished Devices</h3>
+          <ul>
+            <li>Quality-checked devices</li>
+            <li>Individual device inspection</li>
+            <li>IMEI-level testing</li>
+            <li>Condition grading</li>
+            <li>Transparent defect reporting</li>
+            <li>After-sales support where applicable</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <div>🌱</div>
+          <h3>E-Waste and Sustainability</h3>
+          <ul>
+            <li>Responsible electronics disposal</li>
+            <li>Device reuse and refurbishment</li>
+            <li>Parts recovery</li>
+            <li>Extending device lifespan</li>
+            <li>Reducing unnecessary electronic waste</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="eyebrow">Who We Are</div>
+      <h2>About Banana Mobile</h2>
+      <p class="muted" id="aboutText">Founded in 2009 and headquartered in Petaling Jaya, Malaysia, Banana Mobile Solutions is an established mobile-device lifecycle company integrating repair services, mobile spare-parts distribution, e-commerce, trade-in operations, refurbishment and device resale.<br><br>This demo business supports consumers, retailers and corporate partners through practical mobile-device solutions while promoting reuse and responsible recycling.</p>
+      <div class="values" style="margin-top:16px">
+        <div class="value">Fulfilment</div>
+        <div class="value">Honesty</div>
+        <div class="value">Dedication</div>
+        <div class="value">Reliability</div>
+        <div class="value">Ingenuity</div>
+      </div>
+    </section>
+
+
+
+    <section class="section" id="shop">
+      <div class="eyebrow">Official Channels</div>
+      <h2>Shop Online</h2>
+      <div class="shop-grid" id="shopLinks"></div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="eyebrow">Established. Practical. Accountable.</div>
+      <h2>Why Choose Banana</h2>
+      <div class="trust-grid">
+        <div class="trust-card">Established in Malaysia since 2009</div>
+        <div class="trust-card">Experienced mobile-device specialists</div>
+        <div class="trust-card">Repair, parts, trade-in and resale under one ecosystem</div>
+        <div class="trust-card">Support for consumers, dealers and corporate partners</div>
+        <div class="trust-card">Quality-focused inspection processes</div>
+        <div class="trust-card">Responsible reuse and recycling approach</div>
+        <div class="trust-card">Physical service locations</div>
+        <div class="trust-card">Online and offline customer support</div>
+      </div>
+    </section>
+
+    <section class="section" id="locations">
+      <div class="eyebrow">Physical Locations</div>
+      <h2>Visit Us</h2>
+      <div id="locationList"></div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="eyebrow">Direct Contact</div>
+      <h2>Contact Banana Mobile</h2>
+      <div class="contact-list" id="contactList"></div>
+    </section>
+
+    <section class="section" id="enquiry">
+      <div class="eyebrow">Send an Enquiry</div>
+      <h2>How can our team assist?</h2>
+      <form id="enquiryForm" novalidate>
+        <div class="field">
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="fullName" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="mobile">Mobile number</label>
+          <input id="mobile" name="mobile" inputmode="tel" placeholder="e.g. 01161337202" required />
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="enquiryType">Enquiry type</label>
+          <select id="enquiryType" name="enquiryType" required>
+            <option value="">Select one</option>
+            <option>Phone repair</option>
+            <option>Spare parts</option>
+            <option>Trade-in</option>
+            <option>Used device</option>
+            <option>Dealer or wholesale</option>
+            <option>Corporate partnership</option>
+            <option>E-waste recycling</option>
+            <option>General enquiry</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="preferredLocation">Preferred location</label>
+          <select id="preferredLocation" name="preferredLocation">
+            <option value="">No preference</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <input class="hp" tabindex="-1" autocomplete="off" id="website" name="website" />
+        <div class="checkbox">
+          <input type="checkbox" id="consent" required />
+          <label for="consent" class="muted">I consent to Banana Mobile Solutions collecting and processing my information for customer-service and enquiry-management purposes in accordance with its Privacy Policy.</label>
+        </div>
+        <button class="submit-btn" type="submit">Submit Enquiry</button>
+        <div id="formMessage" class="form-message"></div>
+      </form>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Policies</div>
+      <h2>Privacy and Legal</h2>
+      <div class="legal-links" id="legalLinks"></div>
+      <p class="muted" style="font-size:.82rem;margin-top:16px">By submitting an enquiry, you consent to Banana Mobile Solutions collecting and processing your information for customer-service and enquiry-management purposes in accordance with its Privacy Policy.</p>
+    </section>
+
+    <footer>
+      <strong id="footerCompany">Banana Mobile Solutions</strong><br>
+      Demo Registration No. <span id="companyReg">DEMO-REG-0001</span><br>
+      <span id="footerTagline">Repair. Renew. Reuse.</span>
+      <p>Mobile repairs, spare parts, trade-in, refurbishment, pre-owned devices and responsible electronic-device lifecycle solutions.</p>
+      <p>© <span id="year"></span> Banana Mobile Solutions. Demo use only.</p>
+    </footer>
+  </main>
+
+  <a class="whatsapp-float" id="floatingWhatsApp" href="#" target="_blank" rel="noopener" aria-label="Chat with Banana on WhatsApp">💬</a>
+  <button class="admin-toggle" id="adminToggle" type="button">Edit Page</button>
+
+  <div class="admin-panel" id="adminPanel" aria-hidden="true">
+    <div class="admin-card">
+      <h2>Banana Page Settings</h2>
+      <p class="admin-note">Changes are stored in this browser only. For production use, connect these fields to a secure CMS or database.</p>
+      <div class="admin-grid" id="adminFields"></div>
+      <div class="admin-actions">
+        <button class="submit-btn" id="saveSettings" type="button">Save Settings</button>
+        <button class="mini-btn" id="closeAdmin" type="button">Close</button>
+        <button class="mini-btn danger-btn" id="resetSettings" type="button">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULTS = {
+      companyName: "Banana Mobile Solutions",
+      tagline: "Repair. Renew. Reuse.",
+      heroDescription: "Demo mobile device repairs, spare parts, trade-in solutions, refurbished devices and responsible recycling services.",
+      trustLine: "A fictional demo company profile created for presentation purposes.",
+      aboutText: "Founded in 2009 and headquartered in Petaling Jaya, Malaysia, Banana Mobile Solutions is an established mobile-device lifecycle company integrating repair services, mobile spare-parts distribution, e-commerce, trade-in operations, refurbishment and device resale.\\n\\nThis demo business supports consumers, retailers and corporate partners through practical mobile-device solutions while promoting reuse and responsible recycling.",
+      companyReg: "DEMO-REG-0001",
+      logoUrl: "",
+      announcement: "Demo profile only — all company details, contacts and locations are fictional.",
+      whatsapp: "601100000000",
+      phoneHQ: "+601100000001",
+      phoneLowYat: "+601100000002",
+      generalEmail: "hello@example.com",
+      corporateEmail: "business@example.com",
+      repairContact: "mailto:repair@example.com",
+      tradeInContact: "mailto:tradein@example.com",
+      businessHours: "Monday–Saturday, 10:00 AM–7:00 PM",
+      website: "https://example.com",
+      cellcare: "https://example.com/shop",
+      playWinUrl: "fruit_kingdom_play_win/index.html",
+      bananaPrizeUrl: "https://example.com/redeem/banana",
+      papayaPrizeUrl: "https://example.com/redeem/papaya",
+      pineapplePrizeUrl: "https://example.com/redeem/pineapple",
+      repairBooking: "",
+      tradeInUrl: "",
+      usedDeviceUrl: "",
+      corporateUrl: "",
+      ewasteUrl: "",
+      facebook: "",
+      instagram: "",
+      linkedin: "",
+      youtube: "",
+      tiktok: "",
+      shopee: "https://example.com/marketplace",
+      lazada: "https://example.com/store",
+      tiktokShop: "https://example.com/social-shop",
+      phonecareWebsite: "https://example.com/repair",
+      privacyPolicy: "https://example.com/privacy",
+      pdpaNotice: "https://example.com/pdpa",
+      terms: "https://example.com/terms",
+      warrantyPolicy: "https://example.com/warranty",
+      repairTerms: "https://example.com/repair-terms",
+      tradeInTerms: "https://example.com/trade-in-terms",
+      returnPolicy: "https://example.com/returns",
+      contactUrl: "#contact",
+      formEndpoint: ""
+    };
+
+    const FIELD_LABELS = {
+      companyName:"Company Name", tagline:"Tagline", heroDescription:"Header Description",
+      trustLine:"Trust Line", aboutText:"About Text", logoUrl:"Logo Image URL",
+      announcement:"Temporary Announcement", whatsapp:"WhatsApp Number",
+      phoneHQ:"HQ Phone", phoneLowYat:"Demo Kiosk Phone", generalEmail:"General Email",
+      corporateEmail:"Corporate Email", repairContact:"Repair Contact",
+      tradeInContact:"Trade-In Contact", businessHours:"Business Hours",
+      playWinUrl:"Play & Win Game URL", bananaPrizeUrl:"Banana Prize Redemption URL", papayaPrizeUrl:"Papaya Prize Redemption URL", pineapplePrizeUrl:"Pineapple Prize Redemption URL", repairBooking:"Repair Booking URL", tradeInUrl:"Trade-In URL",
+      usedDeviceUrl:"Used Device URL", corporateUrl:"Corporate Enquiry URL",
+      ewasteUrl:"E-Waste URL", facebook:"Facebook URL", instagram:"Instagram URL",
+      linkedin:"LinkedIn URL", youtube:"YouTube URL", tiktok:"TikTok URL",
+      shopee:"Shopee URL", lazada:"Lazada URL", tiktokShop:"TikTok Shop URL",
+      phonecareWebsite:"NovaCare Website", privacyPolicy:"Privacy Policy URL",
+      pdpaNotice:"PDPA Notice URL", terms:"Terms URL", warrantyPolicy:"Warranty Policy URL",
+      repairTerms:"Repair Terms URL", tradeInTerms:"Trade-In Terms URL",
+      returnPolicy:"Return Policy URL", formEndpoint:"Secure Form Endpoint"
+    };
+
+    let settings = {...DEFAULTS, ...JSON.parse(localStorage.getItem("bananaDemoSettings") || "{}")};
+
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const waLink = msg => `https://wa.me/${settings.whatsapp.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`;
+
+    function track(label){
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({event:"demo_profile_click",label});
+      console.info("Tracked:", label);
+    }
+
+    function externalAttrs(url){
+      return /^https?:/i.test(url) ? 'target="_blank" rel="noopener noreferrer"' : '';
+    }
+
+    function addLink(container, item, className="action secondary"){
+      if(!item.url) return;
+      const a = document.createElement("a");
+      a.href = item.url;
+      a.className = className;
+      a.setAttribute("data-track", item.track || item.title);
+      if(/^https?:/i.test(item.url)){
+        a.target="_blank"; a.rel="noopener noreferrer";
+      }
+      a.innerHTML = `<span class="icon">${item.icon || "→"}</span><span>${esc(item.title)}${item.desc?`<small>${esc(item.desc)}</small>`:""}</span><span class="arrow">›</span>`;
+      container.appendChild(a);
+    }
+
+    function render(){
+      $("#companyName").textContent = settings.companyName;
+      $("#tagline").textContent = settings.tagline;
+      $("#heroDescription").textContent = settings.heroDescription;
+      $("#trustLine").textContent = settings.trustLine;
+      $("#aboutText").innerHTML = esc(settings.aboutText).replace(/\n/g,"<br>");
+      $("#footerCompany").textContent = settings.companyName;
+      $("#companyReg").textContent = settings.companyReg;
+      $("#footerTagline").textContent = settings.tagline;
+      $("#year").textContent = new Date().getFullYear();
+
+      const logo = $("#logoBox");
+      logo.innerHTML = settings.logoUrl ? `<img src="${esc(settings.logoUrl)}" alt="${esc(settings.companyName)} logo">` : "M";
+
+      const notice = $("#announcement");
+      notice.textContent = settings.announcement;
+      notice.classList.toggle("hidden", !settings.announcement);
+
+      const social = $("#socialRow");
+      social.innerHTML = "";
+      [
+        ["f",settings.facebook,"Facebook"],["◎",settings.instagram,"Instagram"],
+        ["in",settings.linkedin,"LinkedIn"],["▶",settings.youtube,"YouTube"],["♪",settings.tiktok,"TikTok"]
+      ].forEach(([icon,url,name])=>{
+        if(!url) return;
+        social.insertAdjacentHTML("beforeend",`<a class="social-icon" href="${esc(url)}" target="_blank" rel="noopener" data-track="${name}">${icon}</a>`);
+      });
+
+      const campaignButton = $("#campaignGameButton");
+      campaignButton.href = settings.playWinUrl || "#";
+      if(/^https?:/i.test(settings.playWinUrl)){
+        campaignButton.target = "_blank";
+        campaignButton.rel = "noopener noreferrer";
+      }
+
+      const prizeLinks = $("#prizeLinks");
+      prizeLinks.innerHTML = "";
+      [
+        ["🍌 Banana", settings.bananaPrizeUrl, "Banana Prize Redeem"],
+        ["🥭 Papaya", settings.papayaPrizeUrl, "Papaya Prize Redeem"],
+        ["🍍 Pineapple", settings.pineapplePrizeUrl, "Pineapple Prize Redeem"]
+      ].forEach(([title,url,trackName])=>{
+        if(!url) return;
+        const a = document.createElement("a");
+        a.className = "prize-link";
+        a.href = url;
+        a.textContent = title;
+        a.dataset.track = trackName;
+        if(/^https?:/i.test(url)){
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+        }
+        prizeLinks.appendChild(a);
+      });
+
+      const actions = $("#primaryActions");
+      actions.innerHTML = "";
+      [
+        {title:"Chat With Us on WhatsApp",desc:"Get direct assistance from the Banana team.",icon:"💬",url:waLink("Hi Banana, I would like to know more about your services."),track:"WhatsApp Header"},
+        {title:"Book a Phone Repair",desc:"Screen, battery, charging, camera, motherboard and other repair services.",icon:"🛠️",url:settings.repairBooking || waLink("Hi Banana, I would like to book a phone repair."),track:"Repair Booking"},
+        {title:"Shop Mobile Parts & Repair Tools",desc:"Shop mobile phone LCDs, batteries, spare parts, tools and accessories.",icon:"🛒",url:settings.cellcare,track:"NovaParts Store"},
+        {title:"Trade In Your Device",desc:"Get an assessment and quotation for your used smartphone or tablet.",icon:"♻️",url:settings.tradeInUrl || waLink("Hi Banana, I would like to enquire about trading in my device."),track:"Trade-In"},
+        {title:"Buy Quality-Checked Used Devices",desc:"Explore inspected and quality-checked pre-owned devices.",icon:"📱",url:settings.usedDeviceUrl,track:"Used Devices"},
+        {title:"Corporate and Dealer Enquiries",desc:"Wholesale, dealership, trade-in programme and partnership enquiries.",icon:"🤝",url:settings.corporateUrl || (settings.corporateEmail ? `mailto:${settings.corporateEmail}` : waLink("Hi Banana, I would like to enquire about corporate or dealer collaboration.")),track:"Corporate Enquiry"},
+        {title:"E-Waste and Device Recycling",desc:"Responsible channels for unwanted electronic devices.",icon:"🌱",url:settings.ewasteUrl || waLink("Hi Banana, I would like to enquire about e-waste or device recycling."),track:"E-Waste"},
+        {title:"Visit Banana Mobile Website",icon:"🌐",url:settings.website,track:"Main Website"},
+        {title:"View Our Store Locations",icon:"📍",url:"#locations",track:"Locations"},
+        {title:"Contact Banana Mobile",icon:"☎️",url:"#contact",track:"Contact"}
+      ].forEach((item,i)=>addLink(actions,item,i<4?"action":"action secondary"));
+
+      const shop = $("#shopLinks");
+      shop.innerHTML = "";
+      [
+        ["NovaParts Official Website",settings.cellcare],
+        ["NovaCare Official Website",settings.phonecareWebsite],
+        ["Shopee Store",settings.shopee],
+        ["Lazada Store",settings.lazada],
+        ["TikTok Shop",settings.tiktokShop]
+      ].forEach(([title,url])=>addLink(shop,{title,url,icon:"🛍️",track:title}));
+
+      const locations = [
+        {
+          name:"Banana Mobile Headquarters",
+          address:"Level 2, Demo Tech Hub, Jalan Inovasi 1, 47800 Demo District, Selangor, Malaysia.",
+          map:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("Level 2 Demo Tech Hub Jalan Inovasi 1 47800 Petaling Jaya"),
+          phone:settings.phoneHQ
+        },
+        {
+          name:"Banana Demo Kiosk",
+          address:"Unit K-08, Demo Digital Mall, 50000 Kuala Lumpur, Malaysia.",
+          map:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("Unit K-08 Demo Digital Mall Kuala Lumpur"),
+          phone:settings.phoneLowYat
+        }
+      ];
+      $("#locationList").innerHTML = locations.map(loc=>`
+        <article class="location-card">
+          <h3>${esc(loc.name)}</h3>
+          <address>${esc(loc.address)}</address>
+          <div class="location-actions">
+            <a class="mini-btn" href="${loc.map}" target="_blank" rel="noopener" data-track="Map ${esc(loc.name)}">Map</a>
+            ${loc.phone?`<a class="mini-btn" href="tel:${esc(loc.phone)}" data-track="Call ${esc(loc.name)}">Call</a>`:`<span class="mini-btn" style="opacity:.4">Call</span>`}
+            <a class="mini-btn" href="${waLink("Hi Banana, I would like to enquire about the "+loc.name+".")}" target="_blank" rel="noopener" data-track="WhatsApp ${esc(loc.name)}">WhatsApp</a>
+          </div>
+        </article>`).join("");
+
+      const pref = $("#preferredLocation");
+      pref.innerHTML = '<option value="">No preference</option>' + locations.map(x=>`<option>${esc(x.name)}</option>`).join("");
+
+      const contactItems = [
+        ["WhatsApp",`<a href="${waLink("Hi Banana, I found your company profile and would like to enquire about your services.")}" target="_blank" rel="noopener">+60 11-0000 0000</a>`],
+        ["Website",`<a href="${settings.website}" target="_blank" rel="noopener">example.com</a>`],
+        ["Online store",`<a href="${settings.cellcare}" target="_blank" rel="noopener">example.com/shop</a>`],
+        ["Location","Demo District, Selangor, Malaysia"],
+        ["Business hours",esc(settings.businessHours)],
+        ["General email",settings.generalEmail?`<a href="mailto:${esc(settings.generalEmail)}">${esc(settings.generalEmail)}</a>`:"To be updated"],
+        ["Corporate enquiries",settings.corporateEmail?`<a href="mailto:${esc(settings.corporateEmail)}">${esc(settings.corporateEmail)}</a>`:"To be updated"],
+        ["Repair enquiries",settings.repairContact?`<a href="${esc(settings.repairContact)}">${esc(settings.repairContact)}</a>`:"WhatsApp"],
+        ["Trade-in enquiries",settings.tradeInContact?`<a href="${esc(settings.tradeInContact)}">${esc(settings.tradeInContact)}</a>`:"WhatsApp"]
+      ];
+      $("#contactList").innerHTML = contactItems.map(([k,v])=>`<div class="contact-item"><span>${k}</span><span>${v}</span></div>`).join("");
+
+      const legal = $("#legalLinks");
+      legal.innerHTML = "";
+      [
+        ["Privacy Policy",settings.privacyPolicy],["Personal Data Protection Notice",settings.pdpaNotice],
+        ["Terms and Conditions",settings.terms],["Warranty Policy",settings.warrantyPolicy],
+        ["Repair Terms",settings.repairTerms],["Trade-In Terms",settings.tradeInTerms],
+        ["Return and Refund Policy",settings.returnPolicy],["Contact Us","#contact"]
+      ].forEach(([title,url])=>{
+        if(!url) return;
+        legal.insertAdjacentHTML("beforeend",`<a href="${esc(url)}" ${externalAttrs(url)} data-track="${esc(title)}">${esc(title)}</a>`);
+      });
+
+      $("#floatingWhatsApp").href = waLink("Hi Banana, I found your company profile and would like to enquire about your services.");
+
+      const schema = {
+        "@context":"https://schema.org",
+        "@type":["Organization","LocalBusiness"],
+        "name":settings.companyName,
+        "url":settings.website,
+        "telephone":"+60 11-0000 0000",
+        "foundingDate":"2009",
+        "address":{
+          "@type":"PostalAddress",
+          "streetAddress":"Level 2, Demo Tech Hub, Jalan Inovasi 1",
+          "addressLocality":"Demo District",
+          "addressRegion":"Selangor",
+          "postalCode":"47800",
+          "addressCountry":"MY"
+        },
+        "sameAs":[settings.facebook,settings.instagram,settings.linkedin,settings.youtube,settings.tiktok].filter(Boolean)
+      };
+      $("#schema-json").textContent = JSON.stringify(schema);
+
+      document.querySelectorAll("[data-track]").forEach(el=>{
+        el.onclick = () => track(el.dataset.track);
+      });
+    }
+
+    function validMalaysiaMobile(value){
+      const n = value.replace(/[\s-]/g,"");
+      return /^(?:\+?60|0)1[0-46-9]\d{7,8}$/.test(n);
+    }
+
+    $("#enquiryForm").addEventListener("submit", async e=>{
+      e.preventDefault();
+      const msg = $("#formMessage");
+      msg.className = "form-message";
+      if($("#website").value){
+        msg.className = "form-message success";
+        msg.textContent = "Thank you. The Banana team has received your enquiry and will contact you shortly.";
+        return;
+      }
+      if(!e.currentTarget.checkValidity()){
+        msg.className = "form-message error";
+        msg.textContent = "Please complete all required fields.";
+        return;
+      }
+      if(!validMalaysiaMobile($("#mobile").value)){
+        msg.className = "form-message error";
+        msg.textContent = "Please enter a valid Malaysian mobile number.";
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+      delete data.website;
+
+      if(settings.formEndpoint){
+        try{
+          const response = await fetch(settings.formEndpoint,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(data)
+          });
+          if(!response.ok) throw new Error("Submission failed");
+        }catch(err){
+          msg.className = "form-message error";
+          msg.textContent = "The enquiry could not be submitted. Please contact Banana through WhatsApp.";
+          return;
+        }
+      }else{
+        console.info("Demo form submission:", data);
+      }
+
+      track("Enquiry Form Submission");
+      msg.className = "form-message success";
+      msg.textContent = "Thank you. The Banana team has received your enquiry and will contact you shortly.";
+      e.currentTarget.reset();
+    });
+
+    function buildAdmin(){
+      const wrap = $("#adminFields");
+      wrap.innerHTML = "";
+      Object.entries(FIELD_LABELS).forEach(([key,label])=>{
+        const div = document.createElement("div");
+        div.className = "field";
+        const isLong = ["heroDescription","aboutText","announcement"].includes(key);
+        div.innerHTML = `<label for="admin-${key}">${label}</label>${isLong
+          ? `<textarea id="admin-${key}" data-key="${key}">${esc(settings[key])}</textarea>`
+          : `<input id="admin-${key}" data-key="${key}" value="${esc(settings[key])}">`}`;
+        wrap.appendChild(div);
+      });
+    }
+
+    $("#adminToggle").addEventListener("click",()=>{
+      buildAdmin();
+      $("#adminPanel").classList.add("open");
+      $("#adminPanel").setAttribute("aria-hidden","false");
+    });
+    $("#closeAdmin").addEventListener("click",()=>{
+      $("#adminPanel").classList.remove("open");
+      $("#adminPanel").setAttribute("aria-hidden","true");
+    });
+    $("#saveSettings").addEventListener("click",()=>{
+      document.querySelectorAll("[data-key]").forEach(el=>settings[el.dataset.key]=el.value.trim());
+      localStorage.setItem("bananaDemoSettings",JSON.stringify(settings));
+      render();
+      $("#adminPanel").classList.remove("open");
+    });
+    $("#resetSettings").addEventListener("click",()=>{
+      localStorage.removeItem("bananaDemoSettings");
+      settings={...DEFAULTS};
+      buildAdmin();render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
